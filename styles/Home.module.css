@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 .description {
@@ -275,4 +275,45 @@
   to {
     transform: rotate(0deg);
   }
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  border-radius: var(--border-radius);
+  background: rgba(var(--card-rgb), 0.1);
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: background 200ms, border 200ms;
+  margin-bottom: 2rem;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid rgba(var(--card-border-rgb), 0.25);
+  background: rgba(var(--card-rgb), 0.15);
+}
+
+.submit {
+  width: 100%;
+  max-width: 340px;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  border-radius: var(--border-radius);
+  background-color: darkblue;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: background 200ms, border 200ms;
+}
+
+.suggestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
