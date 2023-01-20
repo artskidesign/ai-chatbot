@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { OpenAIApi } from 'openai';
 
-import { CONFIGURATION } from '../../utils/constants';
+import { CONFIGURATION, OPEN_AI_PROMPTS } from '../../utils/constants';
 
 interface Data {
     result?: string;
@@ -16,7 +16,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
         const { input } = request.body;
         const openaiResponse = await OPEN_AI.createCompletion({
             model: 'text-davinci-003',
-            prompt: `You are an experienced marketer that is here to prepare a post for social media posts for Facebook about this product ${input}`,
+            prompt: OPEN_AI_PROMPTS.marketer + input,
             temperature: 0.85,
             max_tokens: 256,
             top_p: 1,

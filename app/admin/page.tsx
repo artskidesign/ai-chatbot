@@ -11,7 +11,7 @@ const Page = () => {
     const submit = async () => {
         setLoading(true);
         try {
-            const response = await fetch('/api/aiResponse', {
+            const response = await fetch('/api/openAiResponse', {
                 method: 'POST',
                 headers: {
                     // eslint-disable-next-line @typescript-eslint/naming-convention
