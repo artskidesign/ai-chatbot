@@ -1,5 +1,5 @@
-const { Configuration } = require("openai");
+import { Configuration } from 'openai';
 
-export const configuration = new Configuration({
-  apiKey: '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',
+export const CONFIGURATION = new Configuration({
+    apiKey: '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',
 });
