@@ -1,17 +1,19 @@
-import { getCsrfToken, getProviders, signIn } from 'next-auth/react';
+'use client';
+
+import { getCsrfToken, signIn, signOut, useSession } from 'next-auth/react';
+import React from 'react';
 
 interface SignInProperties {
     csrfToken: string;
     providers: Record<string, unknown>;
 }
 
-// interface Provider {
-//     id: string;
-//     name: string;
-// }
-
 export default function SignIn({ csrfToken }: SignInProperties) {
-    // const providersArray = Object.values(providers) as Provider[];
+    const { data: session } = useSession();
+    const user = session?.user;
+    const email = user?.email;
+    // eslint-disable-next-line no-console
+    console.log(session);
 
     return (
         <>
@@ -25,7 +27,7 @@ export default function SignIn({ csrfToken }: SignInProperties) {
                                 onClick={() => signIn('google')}
                             >
                                 <div className="w-[calc(100%-38px)] text-white bg-blue-500 py-2 px-4 hover:bg-blue-600 transition ease-out">
-                                    Sign in with Google
+                                    Continue with Google
                                 </div>
                                 <div className="w-[44px] h-[40px] bg-white flex items-center justify-center rounded-md">
                                     <svg
@@ -57,7 +59,7 @@ export default function SignIn({ csrfToken }: SignInProperties) {
                             </button>
                         </div>
 
-                        <div className="py-4 text-slate-400 text-center text-sm relative before:absolute before:content before:w-full before:h-[1px] before:h-full before:bg-gray-300 before:top-[50%] before:left-0 -z-1">
+                        <div className="py-4 text-slate-400 text-center text-sm relative before:absolute before:content before:w-full before:h-[1px] before:h-full before:bg-gray-300 before:h-px before:top-[50%] before:left-0 -z-1">
                             <span className="px-2 py-2 bg-white z-1 relative">OR</span>
                         </div>
 
@@ -71,25 +73,22 @@ export default function SignIn({ csrfToken }: SignInProperties) {
                                 className="mt-6 bg-slate-200 text-black border border-slate-200 font-medium py-2 px-4 rounded-md hover:bg-slate-300 hover:border-slate-300 focus:outline-none focus:shadow-outline transition ease-out"
                                 type="submit"
                             >
-                                Sign in with Email
+                                Continue with Email
                             </button>
                         </form>
                     </div>
+                    <button onClick={() => signOut()}>Sign out</button>
+                    <p>{email}</p>
                 </div>
             </div>
-            {/* {providersArray.map((provider: Provider) => (
-                <div key={provider.name}>
-                    <button onClick={() => signIn(provider.id)}>Sign in with {provider.name}</button>
-                </div>
-            ))} */}
         </>
     );
 }
 
-export async function getServerSideProps(context) {
-    const csrfToken = await getCsrfToken(context);
+// export async function getServerSideProps(context) {
+//     const csrfToken = await getCsrfToken(context);
 
-    return {
-        props: { csrfToken },
-    };
-}
+//     return {
+//         props: { csrfToken },
+//     };
+// }

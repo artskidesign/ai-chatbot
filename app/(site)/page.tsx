@@ -1,4 +1,6 @@
 'use client';
+import '../../styles/globals.css';
+
 import { useState } from 'react';
 
 import styles from '../../styles/Home.module.css';
@@ -6,10 +8,10 @@ import styles from '../../styles/Home.module.css';
 const Page = () => {
     const [input, setInput] = useState('');
     const [suggestion, setSuggestion] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const submit = async () => {
-        setLoading(true);
+        setIsLoading(true);
         try {
             const response = await fetch('/api/openAiResponse', {
                 method: 'POST',
@@ -27,16 +29,16 @@ const Page = () => {
             // eslint-disable-next-line no-console
             console.error(error);
         } finally {
-            setLoading(false);
+            setIsLoading(false);
         }
     };
 
     return (
-        <div>
-            <h1 className={styles.title}>AI ChatBot</h1>
+        <div className={styles.wrapper}>
+            <h1 className={styles.title}>Copywriter.AI</h1>
             <input className={styles.input} type="text" value={input} onChange={(e) => setInput(e.target.value)} />
             <button className={styles.submit} type="submit" onClick={submit}>
-                {loading ? 'Loading' : 'Generate'}
+                {isLoading ? 'Loading' : 'Generate'}
             </button>
             <div>{suggestion}</div>
         </div>

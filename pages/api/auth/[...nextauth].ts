@@ -1,10 +1,12 @@
-import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+// import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth from 'next-auth/next';
 import EmailProvider from 'next-auth/providers/email';
 import GoogleProvider from 'next-auth/providers/google';
 
 import { Envs as Environments } from '../../../config';
-import clientPromise from '../../../lib/mongodb';
+// import clientPromise from '../../../lib/mongodb';
+import prisma from '../../../lib/prisma';
 
 export default NextAuth({
     // Configure one or more authentication providers
@@ -25,8 +27,12 @@ export default NextAuth({
             from: Environments.EMAIL_FROM,
         }),
     ],
-    adapter: MongoDBAdapter(clientPromise),
+    // adapter: MongoDBAdapter(clientPromise),
+    adapter: PrismaAdapter(prisma),
+    session: {
+        strategy: 'jwt',
+    },
     pages: {
-        signIn: '/auth/signin',
+        signIn: '/signin',
     },
 });

@@ -148,6 +148,12 @@ module.exports = {
                 ],
             },
         },
+        {
+            files: ['*.json'],
+            rules: {
+                quotes: ['error', 'double'],
+            },
+        },
     ],
     settings: {
         next: {
