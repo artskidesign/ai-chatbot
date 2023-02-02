@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { SignInButton } from './SignInButton';
+
 interface Properties {
     items: {
         label: string;
@@ -20,6 +22,9 @@ export const Navbar = ({ items }: Properties): JSX.Element => {
                         </li>
                     );
                 })}
+                <li>
+                    <SignInButton />
+                </li>
             </ul>
         </nav>
     );
